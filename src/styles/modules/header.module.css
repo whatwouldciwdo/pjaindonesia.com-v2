@@ -1,0 +1,115 @@
+.header {
+  position: relative;
+  z-index: 12;
+}
+
+.toggle {
+  display: grid;
+  position: fixed;
+  top: 0;
+  left: 0;
+  grid-template-areas: ". actions";
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  width: 100%;
+  pointer-events: none;
+}
+
+.toggle:hover .contact {
+  width: min(16.875rem, 270px);
+}
+
+.toggleActions {
+  display: grid;
+  grid-area: actions;
+  grid-template-areas: "contact button";
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  height: min(6.625rem, 106px);
+  padding-right: 1.375rem;
+  padding-left: 1.375rem;
+  border-bottom-left-radius: 20px;
+  background: #fff;
+  pointer-events:auto;
+}
+
+.contact {
+  display: none;
+  transition: width .55s;
+}
+
+@media screen and (min-width: 48em) {
+  .contact {
+    display: block;
+    width: min(18.75rem, 300px);
+    font-size: clamp(16px, 1.25rem, 20px);
+    font-weight: 600;
+    text-align: center;
+  }
+}
+
+.button {
+  position: relative;
+  width: min(4.375rem, 70px);
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 48em) {
+  .button {
+    width: min(5rem, 80px);
+  }
+}
+
+.button:hover span:last-of-type {
+  transform: scaleX(.7);
+}
+
+.button:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 130%;
+  height: 250%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+}
+
+.button span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin: min(.3125rem, 5px);
+  transform-origin: right;
+  transition: transform .55s;
+  background: #282b31;
+}
+
+.stickyLogo {
+  position: fixed;
+  z-index: 11;
+  top: 1.375rem;
+  left: 1.375rem;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,.4));
+  visibility: hidden;
+}
+
+:global(.is-scrolled) .stickyLogo {
+  visibility: visible;
+}
+
+.stickyLogoIcon {
+  width: 3.5625rem;
+  height: 2.375rem;
+  transition: fill .55s;
+  fill: #fff;
+}
+
+@media screen and (min-width: 48em) {
+  .stickyLogoIcon {
+    width: min(4.8125rem, 77px);
+    height: min(2.9375rem, 47px);
+  }
+}

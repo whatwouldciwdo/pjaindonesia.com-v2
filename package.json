@@ -1,0 +1,35 @@
+{
+  "name": "ventrex-clone",
+  "version": "1.0.0",
+  "description": "100% pixel-perfect clone of https://www.ventrex.com/en/",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [
+    "ventrex",
+    "clone",
+    "responsive",
+    "gsap",
+    "swiper"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@next/third-parties": "^16.3.6",
+    "@types/node": "^26.6.2",
+    "@types/react": "^19.3.0",
+    "cheerio": "^1.2.0",
+    "gsap": "^3.15.0",
+    "next": "^14.2.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "swiper": "^14.2.0"
+  },
+  "devDependencies": {
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^5.9.3"
+  }
+}

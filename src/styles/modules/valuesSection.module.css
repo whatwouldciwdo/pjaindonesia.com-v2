@@ -1,0 +1,86 @@
+.homeValuesGrid {
+  padding: 6rem 0;
+  position: relative;
+}
+
+.title {
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+.gridContainer {
+  position: relative;
+}
+
+.swiperContainer {
+  display: block;
+}
+
+.wrapper {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .swiperContainer {
+    display: none;
+  }
+  
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.card {
+  margin-bottom: 4rem;
+}
+
+.cardTitle {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.cardCopy {
+  font-size: 1.125rem;
+  color: #666;
+}
+
+.mobImage {
+  margin-top: 2rem;
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.rightCol {
+  position: relative;
+}
+
+.stickyImage {
+  position: sticky;
+  top: 100px;
+  width: 100%;
+  height: 60vh;
+  min-height: 400px;
+}
+
+.deskImage {
+  object-fit: contain;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.deskImage.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.actions {
+  margin-top: 4rem;
+}

@@ -1,0 +1,198 @@
+.footer {
+  position: relative;
+  padding: 2.875rem 0;
+  background: linear-gradient(0deg, #9aa7b4, #e2e6e7);
+}
+.footer__background {
+  text-align: center;
+}
+@media screen and (max-width: 47.99em) {
+  .footer__background {
+    position: absolute;
+    top: 5.625rem;
+    left: 0;
+    width: 100%;
+  }
+}
+.footer__background__icon {
+  width: 20.375rem;
+  height: 45.375rem;
+  margin: auto;
+  fill: #fff;
+}
+@media screen and (min-width: 48em) {
+  .footer__background__icon {
+    width: 104.25rem;
+    height: 46.8125rem;
+  }
+}
+.footer__content {
+  display: grid;
+  position: relative;
+  grid-template-areas: "." "logo" "main-menu" "contact" "alberts" "service-menu";
+  grid-template-rows: 2.875rem 7.5rem 22.5rem 15.625rem;
+  width: 100%;
+}
+@media screen and (min-width: 48em) {
+  .footer__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    grid-template-areas: ". . main-menu" "logo contact main-menu" "service-menu service-menu alberts" ". . .";
+    grid-template-columns: 20rem 1fr 35.625rem;
+    grid-template-rows: 21.5625rem 21.25rem auto;
+    height: 100%;
+  }
+}
+.footer-service-menu {
+  grid-area: service-menu;
+  width: calc(100% - var(--side-padding) * 2);
+  padding: 0;
+  padding-top: 1.875rem;
+  list-style-type: none;
+  border-top: 1px #fff solid;
+  text-align: center;
+  justify-self: center;
+}
+@media screen and (min-width: 48em) {
+  .footer-service-menu {
+    display: flex;
+    align-self: center;
+    justify-content: space-around;
+    padding-left: 2.5rem;
+    border-top: 0;
+    text-align: left;
+    justify-self: unset;
+  }
+}
+.footer-service-menu .menu-item a {
+  transition: opacity 0.35s;
+  color: #fff;
+  font-weight: 600;
+}
+@media (hover: hover) {
+  .footer-service-menu .menu-item a:hover {
+    opacity: 0.5;
+  }
+}
+@media screen and (min-width: 48em) {
+  .footer-service-menu .menu-item a {
+    color: #282b31;
+    font-size: 1.25rem;
+  }
+}
+.footer-menu {
+  grid-area: main-menu;
+  padding: 0;
+  padding: 0.625rem 5.625rem 0;
+  list-style-type: none;
+}
+@media screen and (min-width: 48em) {
+  .footer-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 4.375rem 0;
+  }
+}
+@media screen and (max-width: 47.99em) {
+  .footer-menu .menu-item {
+    margin-bottom: 0.9375rem;
+  }
+}
+.footer-menu .menu-item a {
+  transition: opacity 0.35s;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+@media (hover: hover) {
+  .footer-menu .menu-item a:hover {
+    opacity: 0.5;
+  }
+}
+@media screen and (min-width: 48em) {
+  .footer-menu .menu-item a {
+    font-size: 1.875rem;
+  }
+}
+.footer-logo {
+  grid-area: logo;
+  justify-self: start;
+  padding-left: 3.75rem;
+}
+@media screen and (max-width: 47.99em) {
+  .footer-logo {
+    place-self: center;
+    justify-self: start;
+  }
+}
+@media screen and (min-width: 48em) {
+  .footer-logo {
+    padding-left: 5rem;
+  }
+}
+.footer-logo__icon {
+  width: 3.75rem;
+  height: 2.5rem;
+  fill: #9ba8b5;
+}
+@media screen and (min-width: 48em) {
+  .footer-logo__icon {
+    width: 5.4375rem;
+    height: 3.75rem;
+  }
+}
+.footer-contact {
+  grid-area: contact;
+  text-align: center;
+}
+@media screen and (max-width: 47.99em) {
+  .footer-contact {
+    max-width: 15.625rem;
+    margin: auto;
+    place-self: center;
+  }
+}
+@media screen and (min-width: 48em) {
+  .footer-contact {
+    text-align: left;
+  }
+}
+.footer-contact__claim span {
+  display: block;
+  line-height: 1.2;
+}
+@media screen and (max-width: 47.99em) {
+  .footer-contact__claim span {
+    margin-top: 0.625rem;
+    margin-bottom: 0.625rem;
+  }
+}
+@media screen and (min-width: 48em) {
+  .footer-contact__claim span {
+    margin-bottom: 3.125rem;
+  }
+}
+.footer-alberts {
+  display: flex;
+  grid-area: alberts;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 1.875rem;
+  padding-right: 2.5rem;
+}
+@media screen and (min-width: 48em) {
+  .footer-alberts {
+    align-self: center;
+    padding-top: 0;
+  }
+}
+.footer-alberts__copy {
+  margin-right: 1.25rem;
+  font-size: 1.25rem;
+}
+.footer-alberts__logo {
+  width: 2.6875rem;
+  height: 3.8125rem;
+  fill: #fff;
+}

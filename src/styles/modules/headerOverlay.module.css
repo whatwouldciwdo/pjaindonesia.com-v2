@@ -1,0 +1,219 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 100);
+  padding: min(2.25rem, 36px) min(1.5rem, 24px);
+  overflow: auto;
+  transform: translateY(-100%);
+  transition: transform .55s;
+  background: linear-gradient(45deg, #00aeb8, #0061ac);
+  z-index: 100;
+}
+
+.overlay.active {
+  transform: translateY(0);
+}
+
+.container {
+  display: grid;
+  grid-template-areas: "logo menu-top" ". menu-bottom";
+  grid-template-columns: 3fr 4fr;
+  grid-template-rows: repeat(2, 50vh);
+  height: 100%;
+  max-height: calc((var(--vh, 100vh) * 100) - min(5rem, 80px));
+  padding-bottom: min(5rem, 80px);
+  overflow: auto;
+}
+
+.logo {
+  grid-area: logo;
+  place-self: end;
+  justify-self: center;
+}
+
+.logoIcon {
+  width: 3.5625rem;
+  height: 2.375rem;
+  fill: #ebebeb;
+}
+
+@media screen and (min-width: 48em) {
+  .logoIcon {
+    width: clamp(0px, 27rem, 432px);
+    height: clamp(0px, 18.4375rem, 295px);
+  }
+}
+
+.menu {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.menuTop {
+  grid-area: menu-top;
+  align-self: end;
+  margin-top: min(5.625rem, 90px);
+}
+
+.menuBottom {
+  grid-area: menu-bottom;
+  align-self: start;
+  padding-top: min(6.25rem, 100px);
+}
+
+.menuItemBig {
+  margin: min(.625rem, 10px) 0;
+  line-height: 1;
+}
+
+.menuItemBig a {
+  opacity: .8;
+  color: #f8f8f8;
+  font-weight: 700;
+  letter-spacing: -.125rem;
+  margin: min(1.5625rem, 25px) 0;
+  font-size: min(4.375rem, 70px);
+  display: inline-block;
+}
+
+@media screen and (min-width: 48em) {
+  .menuItemBig a {
+    font-size: min(6.25rem, 100px);
+  }
+}
+
+.menuItemBig span {
+  display: inline-block;
+  position: relative;
+  transition: transform .55s cubic-bezier(.26,1,.48,1);
+}
+
+.menuItemBig a:hover span {
+  transform: translate(10%);
+}
+
+.menuItemSmall {
+  margin: min(.625rem, 10px) 0;
+  line-height: 1;
+}
+
+.menuItemSmall a {
+  margin: min(.9375rem, 15px);
+  color: #fff;
+  font-size: min(1.5625rem, 25px);
+  font-weight: 600;
+  display: inline-block;
+}
+
+.menuItemSmall span {
+  display: inline-block;
+  position: relative;
+  transition: transform .55s cubic-bezier(.26,1,.48,1);
+}
+
+.menuItemSmall a:hover span {
+  transform: translate(10%);
+}
+
+.close {
+  position: absolute;
+  top: .3125rem;
+  right: .3125rem;
+  width: 8.375rem;
+  height: 8.375rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.close:after,
+.close:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3.125rem;
+  height: 1px;
+  transform: translate(-50%, -50%);
+  transition: transform .55s;
+  background: #f8f8f8;
+}
+
+.close:after {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.close:before {
+  transform: translate(-50%, -50%) rotate(135deg);
+}
+
+.close:hover:after {
+  transform: translate(-50%, -50%) rotate(45deg) scale(.8);
+}
+
+.close:hover:before {
+  transform: translate(-50%, -50%) rotate(135deg) scale(.8);
+}
+
+.languagesSelector {
+  display: flex;
+  position: absolute;
+  right: min(2.5rem, 40px);
+  bottom: min(.625rem, 10px);
+  padding: 0;
+  list-style-type: none;
+}
+
+.languagesSelectorItem:first-of-type {
+  margin-right: min(1.875rem, 30px);
+}
+
+.languagesSelectorLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(4.6875rem, 75px);
+  height: min(4.6875rem, 75px);
+  transition: background .55s, color .55s;
+  border: 1px #fff solid;
+  border-radius: min(1.25rem, 20px);
+  color: #fff;
+  font-size: min(1.5625rem, 25px);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.languagesSelectorLink.active {
+  background: #fff;
+  color: #0061ac;
+}
+
+.contact {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(28rem, 448px);
+  height: min(9.6875rem, 155px);
+  transition: background .55s, color .55s;
+  background: #fff;
+  color: #000;
+  font-size: min(1.5625rem, 25px);
+  font-weight: 600;
+  cursor: pointer;
+  border-top-right-radius: min(1.25rem, 20px);
+}
+
+.contact:hover {
+  background: #212227;
+  color: #fff;
+}

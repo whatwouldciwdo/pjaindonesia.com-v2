@@ -1,0 +1,18 @@
+.mapContainer {
+  width: 100%;
+  max-width: 1728px;
+  margin: 0 auto;
+  padding: 4rem 1rem;
+}
+
+.worldMap {
+  width: 100%;
+  height: auto;
+  fill: #e5e7eb; /* Adjust according to brand */
+  stroke: #cbd5e1;
+  transition: all 0.3s ease;
+}
+
+.worldMap path {
+  fill: currentColor;
+}
