@@ -20,12 +20,12 @@ export default function Footer() {
       </div>
       <div className="c-footer__content">
         <div className="c-footer-logo js-footer-logo">
-          <svg
+          <img
+            src="/logo-pja.png"
+            alt="Putra Jayantara Ananta"
             className="c-footer-logo__icon"
-            style={{ '--color': '', '--hoverColor': '' } as React.CSSProperties}
-          >
-            <use xlinkHref="#logo" />
-          </svg>
+            style={{ objectFit: 'contain', width: 'auto' }}
+          />
         </div>
         <div className="c-footer-contact js-footer-contact">
           <h2 className="c-footer-contact__claim title-m is-full">

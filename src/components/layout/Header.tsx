@@ -10,9 +10,12 @@ export default function Header() {
   return (
     <>
       <Link className="c-sticky-logo js-sticky-logo" href="/en/">
-        <svg className="c-sticky-logo__icon js-sticky-logo-svg" style={{ '--color': '', '--hoverColor': '' } as React.CSSProperties}>
-          <use href="#logo" />
-        </svg>
+        <img
+          src="/logo-pja.png"
+          alt="Putra Jayantara Ananta"
+          className="c-sticky-logo__icon js-sticky-logo-svg"
+          style={{ objectFit: 'contain', width: 'auto' }}
+        />
       </Link>
 
       <div className="c-header js-header">

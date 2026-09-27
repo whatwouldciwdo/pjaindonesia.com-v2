@@ -29,9 +29,12 @@ export default function HeaderOverlay({ isOpen, onClose }: HeaderOverlayProps) {
       <div className="c-header-overlay__container">
         <div className="c-header-logo js-header-logo">
           <Link href="/en/" onClick={onClose}>
-            <svg className="c-header-logo__icon" style={{ '--color': '', '--hoverColor': '' } as React.CSSProperties}>
-              <use href="#logo" />
-            </svg>
+            <img
+              src="/logo-pja.png"
+              alt="Putra Jayantara Ananta"
+              className="c-header-logo__icon"
+              style={{ objectFit: 'contain' }}
+            />
           </Link>
         </div>
 

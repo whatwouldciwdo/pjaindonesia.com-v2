@@ -16,9 +16,12 @@ export default function ContactPage() {
       <div className="c-contact__grid">
         <div className="c-contact-image js-contact-image">
           <Link href="/en/" className="c-contact-image__cta">
-            <svg className="c-contact-image__logo" style={{ '--color': '', '--hoverColor': '' } as React.CSSProperties}>
-              <use xlinkHref="#logotype" />
-            </svg>
+            <img
+              src="/logo-pja.png"
+              alt="Putra Jayantara Ananta"
+              className="c-contact-image__logo"
+              style={{ objectFit: 'contain', width: 'auto' }}
+            />
           </Link>
           
           <picture>

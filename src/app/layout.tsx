@@ -14,16 +14,15 @@ const satoshi = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Ventrex',
-    template: '%s - Ventrex',
+    default: 'Putra Jayantara Ananta',
+    template: '%s - Putra Jayantara Ananta',
   },
-  description: 'VENTREX is the partner of choice for valve technology solutions for the mobility of the future.',
+  description: 'PUTRA JAYANTARA ANANTA is the partner of choice for valve technology solutions for the mobility of the future.',
   icons: {
     icon: [
-      { url: '/images/branding/favicon-32x32.png', sizes: '32x32' },
-      { url: '/images/branding/favicon-192x192.png', sizes: '192x192' },
+      { url: '/logo-pja.png' },
     ],
-    apple: '/images/branding/favicon-180x180.png',
+    apple: '/logo-pja.png',
   },
 };
 
