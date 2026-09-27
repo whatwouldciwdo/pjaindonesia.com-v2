@@ -2,6 +2,8 @@
 
 import React, { useEffect } from 'react';
 import Link from 'next/link';
+import Swiper from 'swiper';
+import { Navigation } from 'swiper/modules';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import '@/assets/css/pages/page-2f3e99b1.css';
@@ -12,9 +14,19 @@ if (typeof window !== 'undefined') {
 
 export default function HomePage() {
   useEffect(() => {
-    // 1. Values Section - Sticky Desktop Image Switcher
-    const valuesCards = document.querySelectorAll('.js-home-values-card');
-    const valuesImages = document.querySelectorAll('.js-home-values-image');
+    // Swiper instances & Elements
+    let valuesSwiper: Swiper | null = null;
+    let loghiSwiper: Swiper | null = null;
+
+    const valuesSwiperRoot = document.querySelector<HTMLElement>('.js-home-values-swiper');
+    const valuesSwiperWrapper = document.querySelector<HTMLElement>('.js-home-values-wrapper');
+    const valuesCards = document.querySelectorAll<HTMLElement>('.js-home-values-card');
+    const valuesImages = document.querySelectorAll<HTMLElement>('.js-home-values-image');
+    const cardWrappers = document.querySelectorAll<HTMLElement>('.js-home-values-card-wrapper');
+
+    const loghiSwiperRoot = document.querySelector<HTMLElement>('.js-home-loghi-swiper');
+    const loghiSwiperWrapper = document.querySelector<HTMLElement>('.js-home-loghi-swiper-wrapper');
+    const loghiSlides = document.querySelectorAll<HTMLElement>('.js-home-loghi-swiper-slide');
 
     function setActiveValueImage(id: string) {
       valuesImages.forEach((img: any) => {
@@ -47,6 +59,122 @@ export default function HomePage() {
       setActiveValueImage(activeId);
     }
 
+    function equalizeCardHeights() {
+      if (window.innerWidth >= 768) {
+        cardWrappers.forEach((el) => {
+          el.style.height = '';
+        });
+        return;
+      }
+      cardWrappers.forEach((el) => {
+        el.style.height = '';
+      });
+      let maxHeight = 0;
+      cardWrappers.forEach((el) => {
+        const h = el.offsetHeight;
+        if (h > maxHeight) maxHeight = h;
+      });
+      if (maxHeight > 0) {
+        cardWrappers.forEach((el) => {
+          el.style.height = `${maxHeight}px`;
+        });
+      }
+    }
+
+    function initOrUpdateValuesSwiper() {
+      if (!valuesSwiperRoot || !valuesSwiperWrapper || valuesCards.length === 0) return;
+
+      if (window.innerWidth < 768) {
+        valuesSwiperRoot.classList.add('swiper');
+        valuesSwiperWrapper.classList.add('swiper-wrapper');
+        valuesCards.forEach((c) => c.classList.add('swiper-slide'));
+
+        equalizeCardHeights();
+
+        if (!valuesSwiper) {
+          valuesSwiper = new Swiper(valuesSwiperRoot, {
+            spaceBetween: 20,
+          });
+        } else {
+          valuesSwiper.update();
+        }
+      } else {
+        if (valuesSwiper) {
+          valuesSwiper.destroy(true, true);
+          valuesSwiper = null;
+        }
+        valuesSwiperRoot.classList.remove('swiper');
+        valuesSwiperWrapper.classList.remove('swiper-wrapper');
+        valuesCards.forEach((c) => {
+          c.classList.remove('swiper-slide');
+          c.style.removeProperty('width');
+          c.style.removeProperty('margin-right');
+        });
+        valuesSwiperWrapper.style.removeProperty('transform');
+        valuesSwiperWrapper.style.removeProperty('transition-duration');
+        equalizeCardHeights();
+        checkActiveCard();
+      }
+    }
+
+    function initOrUpdateLoghiSwiper() {
+      if (!loghiSwiperRoot || !loghiSwiperWrapper || loghiSlides.length === 0) return;
+
+      if (window.innerWidth < 768) {
+        loghiSwiperRoot.classList.add('swiper');
+        loghiSwiperWrapper.classList.add('swiper-wrapper');
+        loghiSlides.forEach((s) => s.classList.add('swiper-slide'));
+
+        if (!loghiSwiper) {
+          loghiSwiper = new Swiper(loghiSwiperRoot, {
+            modules: [Navigation],
+            slidesPerView: 2,
+            spaceBetween: 20,
+            navigation: {
+              nextEl: '.js-home-loghi-swiper-next',
+              prevEl: '.js-home-loghi-swiper-prev',
+            },
+          });
+        } else {
+          loghiSwiper.update();
+        }
+      } else {
+        if (loghiSwiper) {
+          loghiSwiper.destroy(true, true);
+          loghiSwiper = null;
+        }
+        loghiSwiperRoot.classList.remove('swiper');
+        loghiSwiperWrapper.classList.remove('swiper-wrapper');
+        loghiSlides.forEach((s) => {
+          s.classList.remove('swiper-slide');
+          s.style.removeProperty('width');
+          s.style.removeProperty('margin-right');
+        });
+        loghiSwiperWrapper.style.removeProperty('transform');
+        loghiSwiperWrapper.style.removeProperty('transition-duration');
+      }
+    }
+
+    initOrUpdateValuesSwiper();
+    initOrUpdateLoghiSwiper();
+
+    const cardImages = document.querySelectorAll('.js-home-values-card img');
+    cardImages.forEach((img) => {
+      if ((img as HTMLImageElement).complete) {
+        equalizeCardHeights();
+      } else {
+        img.addEventListener('load', equalizeCardHeights, { once: true });
+      }
+    });
+    setTimeout(equalizeCardHeights, 300);
+
+    const handleResize = () => {
+      initOrUpdateValuesSwiper();
+      initOrUpdateLoghiSwiper();
+      checkActiveCard();
+    };
+
+    window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', checkActiveCard, { passive: true });
     checkActiveCard();
 
@@ -68,6 +196,41 @@ export default function HomePage() {
     });
 
     // 3. GSAP Animations & ScrollTrigger
+    const mm = gsap.matchMedia();
+    mm.add('(min-width: 768px)', () => {
+      valuesCards.forEach((card) => {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: card,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1,
+          },
+        })
+        .fromTo(card, { opacity: 0, y: 100 }, { opacity: 1, y: 0 })
+        .fromTo(card, { opacity: 1 }, { opacity: 1 })
+        .fromTo(card, { opacity: 1, y: 0 }, { opacity: 0, y: -100 });
+      });
+
+      const valuesTitle = document.querySelector('.js-home-values-title');
+      if (valuesTitle) {
+        gsap.fromTo(
+          valuesTitle,
+          { yPercent: 50, opacity: 0 },
+          {
+            yPercent: 0,
+            opacity: 1,
+            scrollTrigger: {
+              trigger: valuesTitle,
+              scrub: 1,
+              start: 'top bottom',
+              end: 'top center',
+            },
+          }
+        );
+      }
+    });
+
     const heroBg = document.querySelector('.js-hero-background');
     const heroSection = document.querySelector('.c-home-hero');
     if (heroBg && heroSection) {
@@ -167,6 +330,16 @@ export default function HomePage() {
 
     return () => {
       window.removeEventListener('scroll', checkActiveCard);
+      window.removeEventListener('resize', handleResize);
+      if (valuesSwiper) {
+        valuesSwiper.destroy(true, true);
+        valuesSwiper = null;
+      }
+      if (loghiSwiper) {
+        loghiSwiper.destroy(true, true);
+        loghiSwiper = null;
+      }
+      mm.revert();
       ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, []);
@@ -208,7 +381,7 @@ export default function HomePage() {
         <section className="c-intro-home js-intro-home">
         <div className="container">
             <h3 className="c-intro-home__title title-l js-intro-home-title">
-                <span className="u-blue-gradient">VENTREX</span> is the partner of choice for valve technology solutions for the mobility of the future.
+                <span className="u-blue-gradient">PUTRA JAYANTARA ANANTA</span> is the partner of choice for valve technology solutions for the mobility of the future.
             </h3>
             <div className="c-intro-home__copy js-intro-home-copy copy-xm">
                 <p>We develop and industrialize valves for automotive<br />
@@ -228,7 +401,7 @@ in on and off-road vehicles.</p>
                                         
     <a href="/en/air-conditioning-valves/" className="c-home-product-card js-home-product-card" data-index="1">
         <h2 className="c-home-product-card__title title-l">
-            Air conditioning
+            PLC
         </h2>
             
         <img src="/assets/images/dynamic/75573e42.png" loading="lazy" alt="" srcSet="/assets/images/dynamic/75573e42.png 800w, /assets/images/dynamic/cb3ca6c5.png 300w, /assets/images/dynamic/62a2f53b.png 150w, /assets/images/dynamic/7a098621.png 768w" sizes="(max-width: 800px) 100vw, 800px" className="c-home-product-card__image" />
@@ -359,7 +532,7 @@ in on and off-road vehicles.</p>
                                         
         
         
-    <div className="c-home-values-image js-home-values-image is-desk first-item" data-id="1" data-first="true" data-last="false">
+    <div className="c-home-values-image js-home-values-image is-desk first-item active" data-id="1" data-first="true" data-last="false">
 
             
         <img src="/assets/images/dynamic/59e6f307.png" loading="lazy" alt="" srcSet="/assets/images/dynamic/59e6f307.png 569w, /assets/images/dynamic/1dffd993.png 226w" sizes="(max-width: 569px) 100vw, 569px" className="c-home-values-image__pic" />
